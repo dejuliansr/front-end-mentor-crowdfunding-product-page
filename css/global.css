@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+body {
+  font-family: "Hanken Grotesk", serif;
+}
+
+/* Animasi untuk menu */
+@keyframes slideIn {
+  from {
+    transform: translate(15%, 50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(15%, 60%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translate(15%, 60%);
+    opacity: 1;
+  }
+  to {
+    transform: translate(15%, 50%);
+    opacity: 0;
+  }
+}
+
+/* navigasi menu mobile */
+#mobile-menu {
+  display: none;
+  opacity: 0;
+  width: 80%;
+  max-width: 800px;
+  transition: opacity 0.3s ease;
+}
+
+#mobile-menu.show {
+  display: flex;
+  animation: slideIn 0.5s ease forwards;
+}
+
+#mobile-menu.hide {
+  animation: slideOut 0.5s ease forwards;
+}
+
+.target-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease, opacity 0.8s ease, margin-top 0.8s ease; /* Menambahkan transition untuk margin-top */
+}
+
+.target-content.active {
+  max-height: 300px; /* Pastikan ini cukup untuk konten Anda */
+  opacity: 1;
+  margin-top: 50px; /* Atur sesuai kebutuhan */
+}
+
+/* overlay saat menu mobile muncul */
+#overlay {
+  display: none;
+  transition: opacity 0.3s ease-in-out;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0)); /* Gradasi gelap ke cerah */
+}
+
+#overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+.hero-background {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.4)), url('/images/image-hero-mobile.jpg');
+  background-position: center;
+}
+
+/* Overlay saat modal muncul fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Overlay saat modal ditutup fade-out */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* animadi Modal scale-in */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* animasi Modal scale-out */
+@keyframes scaleOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Default modal (hidden by default) */
+#modal {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#modal.active {
+  display: flex;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+#modal.closing {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+/* Modal content default */
+.modal-content {
+  max-height: 80vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-content.active {
+  animation: scaleIn 0.3s ease forwards;
+}
+
+.modal-content.closing {
+  animation: scaleOut 0.3s ease forwards;
+}
+
+/* Default modal (hidden by default) */
+#success-popup {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#success-popup.active {
+  display: flex;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+#success-popup.closing {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+/* animasi konten */
+.slide-down {
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.slide-down.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Menghilangkan panah pada input number */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Standar */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge, Opera */
+  margin: 0; /* Hilangkan margin default */
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+/* .selected {
+  border: 2px solid hsl(176, 50%, 47%);
+} */
+
+.text-Dark-cyan {
+  color: hsl(176, 50%, 47%); /* Sesuaikan warna dengan kebutuhan */
+}
+
+.bg-Dark-cyan {
+  background-color: hsl(176, 50%, 47%); /* Sesuaikan warna dengan kebutuhan */
+}
+
+
+@media (min-width: 768px) { 
+  .hero-background {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.4)), url('/images/image-hero-desktop.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
