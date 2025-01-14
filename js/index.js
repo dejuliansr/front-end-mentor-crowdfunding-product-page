@@ -355,6 +355,91 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 300); // Durasi harus sama dengan animasi fadeOut dan scaleOut
   });
 
+
+  // program untuk animasi seluruh konten
+  // Seleksi semua elemen yang ingin dianimasikan
+  const slideDownElements = document.querySelectorAll('.slide-down');
+  // Buat Intersection Observer
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Tambahkan delay dengan interval waktu untuk animasi
+          setTimeout(() => {
+            entry.target.classList.add('active');
+          }, index * 200); // 200ms adalah jeda antara elemen
+          observer.unobserve(entry.target); // Hentikan pengamatan elemen setelah animasi
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  // Tambahkan elemen ke observer
+  slideDownElements.forEach((el) => observer.observe(el));
+
+  // Seleksi semua elemen dengan angka yang ingin dianimasikan
+  const statNumbers = document.querySelectorAll('.stat-number');
+
+  // Buat Intersection Observer untuk angka
+  const numberObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Mulai animasi angka
+          const stat = entry.target;
+          const target = +stat.getAttribute('data-target'); // Angka tujuan
+          const increment = target / 100; // Kecepatan animasi (200 frame)
+
+          let current = 0;
+
+          function updateNumber() {
+            current += increment;
+            if (current < target) {
+              stat.textContent = Math.floor(current).toLocaleString(); // Format angka
+              requestAnimationFrame(updateNumber);
+            } else {
+              stat.textContent = target.toLocaleString(); // Pastikan angka akhir benar
+            }
+          }
+
+          updateNumber();
+
+          // Hentikan pengamatan untuk elemen ini
+          numberObserver.unobserve(stat);
+        }
+      });
+    },
+    { threshold: 0.4 } // Adjust threshold sesuai kebutuhan
+  );
+
+  // Tambahkan elemen ke observer
+  statNumbers.forEach((stat) => numberObserver.observe(stat));
+
+  function animateProgressBar() {
+    const progressBar = document.getElementById("progress-bar");
+    const statElement = document.querySelector(".stat-number[data-target='89914']");
+    const currentValue = parseInt(statElement.innerText.replace(/\D/g, "")); // Ambil angka dari teks DOM
+    const maxValue = 100000; // Nilai maksimal (100,000)
+
+    const targetPercentage = (currentValue / maxValue) * 100; // Hitung persentase target
+    let currentWidth = 0;
+
+    // Animasi bar dari 0 ke targetPercentage
+    const interval = setInterval(() => {
+      if (currentWidth >= targetPercentage) {
+          clearInterval(interval); // Hentikan animasi saat target tercapai
+      } else {
+          currentWidth++;
+          progressBar.style.width = `${currentWidth}%`; // Perbarui lebar bar
+      }
+    }, 10); // Kecepatan animasi
+  }
+
+    // Jalankan animasi setelah halaman dimuat
+  window.onload = function () {
+    animateProgressBar();
+  };
 });
 
 
