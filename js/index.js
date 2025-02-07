@@ -338,6 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
           successPopup.classList.add("active");
         }, 300);
       }
+      animateProgressBar(newTotalBacked);
     });
   });
 

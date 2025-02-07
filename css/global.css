@@ -224,9 +224,9 @@ input[type="number"]::-webkit-inner-spin-button {
   border: 1px solid red;
 }
 
-/* .selected {
+.selected {
   border: 2px solid hsl(176, 50%, 47%);
-} */
+}
 
 .text-Dark-cyan {
   color: hsl(176, 50%, 47%); /* Sesuaikan warna dengan kebutuhan */
@@ -236,6 +236,36 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: hsl(176, 50%, 47%); /* Sesuaikan warna dengan kebutuhan */
 }
 
+/* custom radio button */
+input[type="radio"] {
+  display: none;
+}
+
+.custom-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + .custom-radio {
+  border-color: hsl(0, 0%, 80%);
+}
+
+input[type="radio"]:checked + .custom-radio::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: hsl(176, 50%, 47%);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
 
 @media (min-width: 768px) { 
   .hero-background {
